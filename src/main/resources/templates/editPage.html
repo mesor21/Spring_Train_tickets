@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header></header>
+<div class="blog">
+    <div class="container">
+        <p>Параметров сотрудников</p>
+        <table>
+            <thead>
+            <th>ID</th>
+            <th>Место</th>
+            <th>ФИО</th>
+            <th>Станция отправления</th>
+            <th>Станция прибытия</th>
+            <th>Стоимость билета</th>
+            <th>Стоимость плацкарты</th>
+            </thead>
+            <tbody>
+            <tr th:each="ticket: ${ticket}">
+                <form th:action="'/admin/' + ${ticket.getId}" method="post">
+                    <table style="{width: 100%}">
+                        <tr>
+                            <td th:text=${ticket.getId}></td>
+                            <td><input th:value="${ticket.getPlace}" type="text" id="place" name="place"></td>
+                            <td><input th:value="${ticket.getName}" type="text" id="name" name="name"></td>
+                            <td><input th:value="${ticket.getDepartureStation}" type="text" id="departureStation" name="departureStation"></td>
+                            <td><input th:value="${ticket.getArrivalStation}" type="text" id="arrivalStation" name="arrivalStation"></td>
+                            <td><input th:value="${ticket.getPrice}" type="text" id="price" name="price"></td>
+                            <td><input th:value="${ticket.getPriceOfGroundCard}" type="text" id="priceOfGroundCard" name="priceOfGroundCard"></td>
+                            <td th:value="${ticket.isUsed}" name="used"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div class="tableFooter">
+                                    <a th:href="@{/admin/delete/{id}(id=${ticket.getId})}">
+                                        <button class="btn1" type="button">Удалить</button>
+                                    </a>
+                                    <a th:href="'/admin/' + ${ticket.getId}">
+                                        <button class="btn1" type="submit">Подтвердить изменения
+                                        </button></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

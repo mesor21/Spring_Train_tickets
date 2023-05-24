@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header>
+</header>
+<div class="blog">
+    <p>Билеты</p>
+    <form th:action="@{/admin}" method="GET"><br>
+        <table>
+            <thead>
+            <th>ID</th>
+            <th>Место</th>
+            <th>ФИО</th>
+            <th>Станция отправления</th>
+            <th>Станция прибытия</th>
+            <th>Стоимость билета</th>
+            <th>Стоимость плацкарты</th>
+            <th>Использован ли</th>
+            </thead>
+            <tr th:each="ticket: ${list}">
+                <td th:text="${ticket.getId}"></td>
+                <td th:text="${ticket.getPlace}"></td>
+                <td th:text="${ticket.getName}"></td>
+                <td th:text="${ticket.getDepartureStation}"></td>
+                <td th:text="${ticket.getArrivalStation}"></td>
+                <td th:text="${ticket.getPrice}"></td>
+                <td th:text="${ticket.getPriceOfGroundCard}"></td>
+                <td th:text="${ticket.isUsed}"></td>
+                <td><a th:href="@{/admin/{id}(id=${ticket.getId})}"
+                       class="btn3">Редактировать</a></td>
+            </tr>
+        </table>
+    </form>
+    <form th:action="@{/admin/new}" method="get">
+        <button class="btn1 button" type="submit" method="get" >Создать билет</button>
+    </form>
+</div>
+</body>
+
+</html>
